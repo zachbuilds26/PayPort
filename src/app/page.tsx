@@ -250,7 +250,7 @@ export default function Home() {
             </ul>
           </article>
 
-          <article className="border border-accent/30 bg-accent/5 p-6 sm:p-8">
+          <article className="border border-accent/15 bg-accent/5 p-6 sm:p-8">
             <p className="text-[10px] font-semibold tracking-[0.15em] text-accent uppercase">
               The PayPort way
             </p>
