@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Icon } from "@/components/ui/icon";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ConnectWallet } from "@/components/wallet/connect-wallet";
 import { useWalletController } from "@/components/wallet/wallet-controller";
 import { buildCheckoutPath, explorerAddress, xlayerChain, shortenAddress } from "@/lib/chain";
 import { formatReadError } from "@/lib/payport-errors";
@@ -246,9 +245,6 @@ export function DashboardOverview() {
               <Icon name="arrow-up-right" className="size-3" />
             </a>
           </div>
-          <div className="sm:w-64">
-            <ConnectWallet />
-          </div>
         </div>
 
         <section className="mt-8 border border-line bg-surface p-6 sm:p-8">
@@ -298,9 +294,6 @@ export function DashboardOverview() {
             {shortenAddress(PAYPORT_ADDRESS)}
             <Icon name="arrow-up-right" className="size-3" />
           </a>
-        </div>
-        <div className="sm:w-64">
-          <ConnectWallet />
         </div>
       </div>
 

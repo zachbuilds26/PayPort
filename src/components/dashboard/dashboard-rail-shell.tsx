@@ -58,7 +58,7 @@ function DashboardChrome({ children }: { children: ReactNode }) {
             </button>
           </nav>
           <div className="ml-auto">
-            <ConnectWallet />
+            <ConnectWallet compact />
           </div>
         </div>
       </header>
