@@ -1,11 +1,31 @@
 import { Pool } from "pg";
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
-});
+function getPool() {
+  if (!process.env.DATABASE_URL) {
+    throw new Error("DATABASE_URL is not set");
+  }
+  return new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+    max: 2,
+    idleTimeoutMillis: 10000,
+    connectionTimeoutMillis: 10000,
+  });
+}
+
+let _pool: ReturnType<typeof getPool> | null = null;
+
+function getSharedPool() {
+  if (!_pool) {
+    _pool = getPool();
+  }
+  return _pool;
+}
 
 async function query(text: string, params?: unknown[]) {
+  const pool = getSharedPool();
   const client = await pool.connect();
   try {
     return await client.query(text, params);
