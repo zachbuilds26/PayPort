@@ -203,9 +203,6 @@ export function DashboardOverview() {
               <Icon name="arrow-up-right" className="size-3" />
             </a>
           </div>
-          <div className="sm:w-64">
-            <ConnectWallet />
-          </div>
         </div>
 
         <section className="mt-8 border border-line bg-surface p-6 sm:p-8">
