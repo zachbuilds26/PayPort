@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ConnectWallet } from "@/components/wallet/connect-wallet";
 import { useWalletController } from "@/components/wallet/wallet-controller";
 import { xlayerChain, shortenAddress, explorerTx } from "@/lib/chain";
 
@@ -55,9 +54,6 @@ export default function PaymentsPage() {
               ? `Payments received by ${shortenAddress(address)}.`
               : "Connect your wallet to view payment history."}
           </p>
-        </div>
-        <div className="sm:w-64">
-          <ConnectWallet />
         </div>
       </div>
 
