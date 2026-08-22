@@ -115,7 +115,7 @@ a.border-line {
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-danger: var(--danger);
-  --font-display: var(--font-chakra);
+  --font-display: var(--font-unbounded);
   --font-sans: var(--font-space-grotesk);
 }
 
@@ -179,7 +179,7 @@ select:focus-visible {
 }
 
 .font-display {
-  font-family: var(--font-chakra), Arial, sans-serif;
+  font-family: var(--font-display), Arial, sans-serif;
   font-weight: 700;
 }
 

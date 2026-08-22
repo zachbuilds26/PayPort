@@ -1,10 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Chakra_Petch, Space_Grotesk } from "next/font/google";
+import { Chakra_Petch, Space_Grotesk, Unbounded } from "next/font/google";
 import { Providers } from "./providers";
 import "./globals.css";
 
 const chakra = Chakra_Petch({
   variable: "--font-chakra",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const unbounded = Unbounded({
+  variable: "--font-unbounded",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
@@ -54,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${chakra.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${unbounded.variable} ${chakra.variable} ${spaceGrotesk.variable}`}>
       <body suppressHydrationWarning>
         <Providers>{children}</Providers>
       </body>

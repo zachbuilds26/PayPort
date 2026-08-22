@@ -159,21 +159,21 @@ export default function Home() {
           </div>
         </header>
 
-        <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pb-12 pt-12 text-center sm:px-8 sm:pb-16 lg:px-10 lg:pt-24">
+        <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pb-10 pt-8 text-center sm:px-8 sm:pb-14 lg:px-10 lg:pt-16">
           <p className="inline-flex items-center gap-2 border border-line bg-background-deep/70 px-2.5 py-1 text-[10px] font-semibold tracking-[0.15em] text-muted uppercase">
             <span className="size-1.5 bg-accent animate-pulse" />
             Live on {xlayerChain.name}
           </p>
-          <h1 className="font-display mt-7 max-w-3xl text-5xl leading-[0.92] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
+          <h1 className="font-display mt-5 max-w-3xl text-5xl leading-[0.92] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
             Payment links
             <br />
             <span className="text-accent/95">Settled in native USDC.</span>
           </h1>
-          <p className="mt-7 max-w-2xl text-base leading-7 text-muted">
+          <p className="mt-5 max-w-2xl text-base leading-7 text-muted">
             Publish a payment link with a clear dollar price. Your customers pay it in
             native USDC on X Layer. The copilot writes it, you sign it.
           </p>
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               href="/dashboard"
               className="inline-flex w-full items-center justify-center gap-2 bg-accent px-5 py-3 text-sm font-semibold text-accent-ink hover:bg-white sm:w-auto"
@@ -188,7 +188,7 @@ export default function Home() {
               View docs <Icon name="arrow-up-right" className="size-4" />
             </Link>
           </div>
-          <p className="mt-5 max-w-xl text-xs leading-5 text-muted">
+          <p className="mt-4 max-w-xl text-xs leading-5 text-muted">
             Testnet only. Get free test USDC from{" "}
             <a
               href="https://faucet.circle.com/"
