@@ -164,7 +164,7 @@ export default function Home() {
             <span className="size-1.5 bg-accent animate-pulse" />
             Live on {xlayerChain.name}
           </p>
-          <h1 className="font-display mt-5 max-w-3xl text-5xl leading-[0.92] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
+          <h1 className="font-display mt-5 max-w-3xl text-4xl leading-[0.92] tracking-[-0.055em] sm:text-5xl lg:text-6xl">
             Payment links
             <br />
             <span className="text-accent/95">Settled in native USDC.</span>
