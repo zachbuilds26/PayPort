@@ -22,8 +22,8 @@ function DashboardChrome({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background text-ink">
-      <header className="sticky top-0 z-20 border-b border-line bg-background/95 px-4 backdrop-blur sm:px-6">
-        <div className="relative mx-auto flex max-w-7xl items-center py-3">
+      <header className="sticky top-0 z-20 border-b border-line bg-background/95 backdrop-blur">
+        <div className="relative mx-auto flex max-w-7xl items-center px-5 py-3 sm:px-8 lg:px-10">
           <PayPortLogo compact />
           <nav
             className="absolute left-1/2 flex -translate-x-1/2 items-center gap-2"
