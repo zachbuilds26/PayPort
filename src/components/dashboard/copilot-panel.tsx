@@ -334,14 +334,14 @@ export function CopilotPanel() {
               <input
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
-                placeholder="create a $5 payment link…"
+                placeholder={isConnected ? "create a $5 payment link…" : "Connect wallet to use copilot"}
                 aria-label="Message the copilot"
                 className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm outline-none placeholder:text-faint"
-                disabled={busy}
+                disabled={busy || !isConnected}
               />
               <button
                 type="submit"
-                disabled={busy || !input.trim()}
+                disabled={busy || !input.trim() || !isConnected}
                 className="shrink-0 border-l border-line px-3 text-xs font-semibold text-accent hover:bg-accent hover:text-accent-ink disabled:opacity-50"
               >
                 Send
