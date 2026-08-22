@@ -162,7 +162,7 @@ export default function Home() {
         <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pb-10 pt-8 text-center sm:px-8 sm:pb-14 lg:px-10 lg:pt-16">
           <p className="inline-flex items-center gap-2 px-2.5 py-1 text-[10px] font-semibold tracking-[0.15em] text-muted uppercase">
             <span className="size-1.5 bg-accent animate-pulse" />
-            <Image src="/xlayer logo.png" alt="" width={12} height={12} unoptimized className="opacity-80" />
+            <Image src="/xlayer-logo.png" alt="" width={12} height={12} unoptimized className="opacity-80" />
             Live on {xlayerChain.name}
           </p>
           <h1 className="font-display mt-5 max-w-3xl text-4xl leading-[0.92] tracking-[-0.055em] sm:text-5xl lg:text-6xl">
