@@ -245,7 +245,7 @@ export default function Home() {
             </ul>
           </article>
 
-          <article className="border border-line bg-surface p-6 sm:p-8">
+          <article className="border border-accent/30 bg-accent/5 p-6 sm:p-8">
             <p className="text-[10px] font-semibold tracking-[0.15em] text-accent uppercase">
               The PayPort way
             </p>
@@ -261,7 +261,7 @@ export default function Home() {
         </div>
       </section>
 
-    <section id="copilot" className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10">
+    <section id="copilot" className="relative border-t border-line bg-background-deep/40 mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-10">
         <div className="max-w-2xl">
           <p className="text-[10px] font-semibold tracking-[0.15em] text-accent uppercase">
             The copilot
@@ -277,7 +277,7 @@ export default function Home() {
 
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           {copilotSteps.map((step) => (
-            <article key={step.number} className="flex flex-col border border-line bg-surface p-5 sm:p-6">
+            <article key={step.number} className="flex flex-col border border-line bg-background p-5 sm:p-6">
               <p className="text-xs font-semibold tracking-[0.16em] text-accent">{step.number}</p>
               <h3 className="mt-3 text-lg font-medium">{step.step}</h3>
               <p className="mt-2 text-sm leading-6 text-muted">{step.body}</p>
@@ -318,7 +318,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="faq" className="relative mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 overflow-hidden">
+      <section id="faq" className="relative border-t border-line bg-background-deep/30 mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 overflow-hidden">
         <div className="max-w-2xl">
           <p className="text-[10px] font-semibold tracking-[0.15em] text-accent uppercase">FAQ</p>
           <h2 className="font-display mt-4 text-4xl tracking-[-0.045em] sm:text-5xl">
@@ -334,7 +334,7 @@ export default function Home() {
             <details
               key={item.question}
               name="faq"
-              className="group rounded-none border border-line bg-surface p-5 transition hover:border-line-strong hover:bg-surface-hover"
+              className="group rounded-none border border-line bg-background p-5 transition hover:border-line-strong hover:bg-surface-hover"
             >
               <summary className="flex cursor-pointer items-start justify-between gap-4 text-left font-display text-xl leading-tight tracking-[-0.035em]">
                 <span>{item.question}</span>
@@ -349,7 +349,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-8 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
+      <footer className="mx-auto flex max-w-7xl flex-col gap-5 border-t border-line px-5 py-8 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
         <PayPortLogo />
         <div className="flex flex-col gap-2 sm:items-end">
           <a
