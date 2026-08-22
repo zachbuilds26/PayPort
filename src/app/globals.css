@@ -94,6 +94,11 @@ a.border-line {
   background-size: 42px 42px;
 }
 
+@keyframes typewriter {
+  from { max-width: 0; }
+  to { max-width: 1ch; }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-background-deep: var(--background-deep);
