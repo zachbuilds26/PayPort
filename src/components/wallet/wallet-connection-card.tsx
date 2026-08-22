@@ -89,6 +89,24 @@ export function WalletConnectionCard({ railKey, compact = false }: { railKey: Ra
 
   const zeroBalance = balance?.value === 0n;
 
+  if (compact) {
+    return (
+      <div className="flex items-center gap-2">
+        <span className="flex items-center gap-1.5 text-xs text-muted">
+          <span className="size-1.5 shrink-0 bg-success" />
+          <span className="font-mono">{wallet.address && shortenAddress(wallet.address)}</span>
+        </span>
+        <button
+          type="button"
+          onClick={() => disconnect()}
+          className="border border-line px-2 py-1 text-[10px] text-muted hover:border-line-strong hover:text-ink"
+        >
+          Disconnect
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className={compact ? "" : "w-full"}>
       <div className="flex items-center justify-between gap-3 border border-line bg-background-deep px-3.5 py-2.5">
