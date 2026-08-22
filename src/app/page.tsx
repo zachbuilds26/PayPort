@@ -160,7 +160,7 @@ export default function Home() {
         </header>
 
         <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pb-10 pt-8 text-center sm:px-8 sm:pb-14 lg:px-10 lg:pt-16">
-          <p className="inline-flex items-center gap-2 border border-line bg-background-deep/70 px-2.5 py-1 text-[10px] font-semibold tracking-[0.15em] text-muted uppercase">
+          <p className="inline-flex items-center gap-2 px-2.5 py-1 text-[10px] font-semibold tracking-[0.15em] text-muted uppercase">
             <span className="size-1.5 bg-accent animate-pulse" />
             Live on {xlayerChain.name}
           </p>

@@ -209,7 +209,7 @@ export function WalletControllerProvider({ children }: { children: ReactNode }) 
                   <span className="inline-flex items-center gap-3">
                     {connector.icon ? (
                       <Image
-                        src={connector.icon}
+                        src={connector.icon.trim()}
                         alt=""
                         width={16}
                         height={16}
