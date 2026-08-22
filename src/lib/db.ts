@@ -1,9 +1,21 @@
-import { neon } from "@neondatabase/serverless";
+import { Pool } from "pg";
 
-const sql = neon(process.env.DATABASE_URL!);
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+});
+
+async function query(text: string, params?: unknown[]) {
+  const client = await pool.connect();
+  try {
+    return await client.query(text, params);
+  } finally {
+    client.release();
+  }
+}
 
 export async function ensureTable() {
-  await sql`
+  await query(`
     CREATE TABLE IF NOT EXISTS payments (
       id            SERIAL PRIMARY KEY,
       slug          TEXT NOT NULL,
@@ -14,7 +26,7 @@ export async function ensureTable() {
       status        TEXT NOT NULL DEFAULT 'pending',
       created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
-  `;
+  `);
 }
 
 export async function insertPayment(row: {
@@ -26,44 +38,45 @@ export async function insertPayment(row: {
   status?: string;
 }) {
   await ensureTable();
-  const [result] = await sql`
-    INSERT INTO payments (slug, amount_usdc, payer, merchant, tx_hash, status)
-    VALUES (${row.slug}, ${row.amount_usdc}, ${row.payer}, ${row.merchant}, ${row.tx_hash ?? ""}, ${row.status ?? "pending"})
-    RETURNING *
-  `;
-  return result;
+  const result = await query(
+    `INSERT INTO payments (slug, amount_usdc, payer, merchant, tx_hash, status)
+     VALUES ($1, $2, $3, $4, $5, $6)
+     RETURNING *`,
+    [row.slug, row.amount_usdc, row.payer, row.merchant, row.tx_hash ?? "", row.status ?? "pending"]
+  );
+  return result.rows[0];
 }
 
 export async function updatePaymentByTxHash(txHash: string, status: string) {
-  const [result] = await sql`
-    UPDATE payments SET status = ${status} WHERE tx_hash = ${txHash} RETURNING *
-  `;
-  return result;
+  const result = await query(
+    `UPDATE payments SET status = $1 WHERE tx_hash = $2 RETURNING *`,
+    [status, txHash]
+  );
+  return result.rows[0];
 }
 
 export async function getPaymentsByMerchant(merchant: string) {
   await ensureTable();
-  return sql`
-    SELECT * FROM payments
-    WHERE LOWER(merchant) = LOWER(${merchant})
-    ORDER BY created_at DESC
-    LIMIT 50
-  `;
+  const result = await query(
+    `SELECT * FROM payments WHERE LOWER(merchant) = LOWER($1) ORDER BY created_at DESC LIMIT 50`,
+    [merchant]
+  );
+  return result.rows;
 }
 
 export async function getPaymentByTxHash(txHash: string) {
-  const [result] = await sql`
-    SELECT * FROM payments WHERE tx_hash = ${txHash} LIMIT 1
-  `;
-  return result;
+  const result = await query(
+    `SELECT * FROM payments WHERE tx_hash = $1 LIMIT 1`,
+    [txHash]
+  );
+  return result.rows[0];
 }
 
 export async function getPaymentsBySlug(slug: string) {
   await ensureTable();
-  return sql`
-    SELECT * FROM payments
-    WHERE slug = ${slug}
-    ORDER BY created_at DESC
-    LIMIT 50
-  `;
+  const result = await query(
+    `SELECT * FROM payments WHERE slug = $1 ORDER BY created_at DESC LIMIT 50`,
+    [slug]
+  );
+  return result.rows;
 }
