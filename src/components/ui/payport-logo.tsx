@@ -27,11 +27,9 @@ export function PayPortLogo({ href = "/", compact = false }: PayPortLogoProps) {
           priority
         />
       </span>
-      {!compact && (
-        <span className="font-display text-[15px] font-semibold tracking-[-0.03em] text-ink">
-          PayPort
-        </span>
-      )}
+      <span className="font-display text-[15px] font-semibold tracking-[-0.03em] text-ink">
+        PayPort
+      </span>
     </Link>
   );
 }
