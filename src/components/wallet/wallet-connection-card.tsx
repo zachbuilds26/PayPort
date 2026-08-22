@@ -96,6 +96,13 @@ export function WalletConnectionCard({ railKey, compact = false }: { railKey: Ra
           <span className="size-1.5 shrink-0 bg-success" />
           <span className="font-mono">{wallet.address && shortenAddress(wallet.address)}</span>
         </span>
+        {balance && (
+          <span className="text-xs font-semibold tabular-nums text-muted">
+            {Number(formatUnits(balance.value, balance.decimals)).toLocaleString("en-US", {
+              maximumFractionDigits: 2,
+            })} {balance.symbol}
+          </span>
+        )}
         <button
           type="button"
           onClick={() => disconnect()}
