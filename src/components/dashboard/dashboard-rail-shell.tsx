@@ -31,6 +31,13 @@ function DashboardChrome({ children }: { children: ReactNode }) {
               <Icon name="grid" className="size-3.5" />
               Overview
             </Link>
+            <Link
+              href="/payments"
+              className="inline-flex items-center gap-2 border border-line px-3 py-2 text-xs font-semibold text-muted transition hover:border-line-strong hover:text-ink sm:px-4"
+            >
+              <Icon name="receipt" className="size-3.5" />
+              Payments
+            </Link>
             <button
               type="button"
               onClick={() => window.dispatchEvent(new Event("payport:open-copilot"))}

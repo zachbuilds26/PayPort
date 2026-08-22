@@ -138,9 +138,21 @@ function CheckoutCard({
         priceUsdCents: link.priceUsdCents.toString(),
         paidAt: Math.floor(Date.now() / 1000),
       });
+      fetch("/api/payments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          slug,
+          amount_usdc: Number(link.priceUsdCents) / 100,
+          payer: address ?? "unknown",
+          merchant: link.merchant,
+          tx_hash: payment.hash,
+          status: "settled",
+        }),
+      }).catch(() => {});
       onPaid(payment.hash);
     }
-  }, [payment.isConfirmed, payment.hash, onPaid, slug, link.title, link.priceUsdCents]);
+  }, [payment.isConfirmed, payment.hash, onPaid, slug, link.title, link.priceUsdCents, link.merchant, address]);
 
   if (payment.isConfirmed && payment.hash) {
     return <PaidReceipt link={link} slug={slug} hash={payment.hash} />;
