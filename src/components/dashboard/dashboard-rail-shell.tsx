@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { createContext, useContext, useMemo, type ReactNode } from "react";
 import { Icon } from "@/components/ui/icon";
 import { PayPortLogo } from "@/components/ui/payport-logo";
+import { ConnectWallet } from "@/components/wallet/connect-wallet";
 import { CopilotPanel } from "@/components/dashboard/copilot-panel";
 import { getRail, type RailConfig, type RailKey } from "@/lib/chain";
 
@@ -56,6 +57,9 @@ function DashboardChrome({ children }: { children: ReactNode }) {
               Create New Link
             </button>
           </nav>
+          <div className="ml-auto">
+            <ConnectWallet />
+          </div>
         </div>
       </header>
       <main className="pb-16">{children}</main>
