@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const SPLASH_KEY = "payport:splash:v1";
 const SPLASH_MS = 5000;
 
 export function SplashScreen({ onComplete }: { onComplete: () => void }) {
@@ -11,20 +10,12 @@ export function SplashScreen({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState<"idle" | "logo" | "type" | "exit">("idle");
 
   useEffect(() => {
-    try {
-      if (sessionStorage.getItem(SPLASH_KEY)) {
-        onComplete();
-        return;
-      }
-    } catch {}
-
     setShow(true);
 
     const t1 = setTimeout(() => setPhase("logo"), 200);
     const t2 = setTimeout(() => setPhase("type"), 1200);
     const t3 = setTimeout(() => setPhase("exit"), 4200);
     const t4 = setTimeout(() => {
-      try { sessionStorage.setItem(SPLASH_KEY, "1"); } catch {}
       setShow(false);
       onComplete();
     }, SPLASH_MS);
