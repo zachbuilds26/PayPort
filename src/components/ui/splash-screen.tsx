@@ -32,7 +32,11 @@ export function SplashScreen({ onComplete }: { onComplete: () => void }) {
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-background">
-      <div className="flex items-center gap-3 overflow-hidden">
+      <div
+        className={`flex items-center gap-3 overflow-hidden transition-all duration-700 ease-in ${
+          phase === "exit" ? "-translate-x-[120%] opacity-0" : "translate-x-0 opacity-100"
+        }`}
+      >
         <div
           className={`transition-all duration-1000 ease-out ${
             phase === "idle"
