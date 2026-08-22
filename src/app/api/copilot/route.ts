@@ -205,6 +205,11 @@ export async function POST(request: Request) {
     );
   }
 
+  const contentLength = request.headers.get("content-length");
+  if (contentLength && Number(contentLength) > 10000) {
+    return NextResponse.json({ reply: "Request too large." }, { status: 413 });
+  }
+
   let message = "";
   try {
     const body = (await request.json()) as { message?: unknown };

@@ -56,7 +56,7 @@ function formatSettlementAge(now: bigint | undefined, paidAt: bigint) {
   return `${Math.max(1, Math.round(seconds / 86400))}d ago`;
 }
 
-/** "12.34 USDT settled", the exact token amount the merchant received. */
+/** "12.34 USDC settled", the exact token amount the merchant received. */
 function formatSettledBreakdown(collectedToken: bigint) {
   if (collectedToken === 0n) return "0.00 settled";
   return `${formatAssetAmount(collectedToken, 1, 2)} ${assetSymbol(1)} settled`;
@@ -89,8 +89,8 @@ function LinkActions({
         <Icon name="arrow-up-right" className="size-3.5" />
       </Link>
       <Link
-        href="/receipts"
-        aria-label={`Download receipts for ${link.title}`}
+        href="/payments"
+        aria-label={`View payments for ${link.title}`}
         className="grid size-9 place-items-center border border-line text-muted hover:border-line-strong hover:text-ink"
       >
         <Icon name="receipt" className="size-3.5" />

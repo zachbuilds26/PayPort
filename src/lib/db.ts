@@ -6,9 +6,7 @@ function getPool() {
   }
   return new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    ssl: { rejectUnauthorized: false },
     max: 2,
     idleTimeoutMillis: 10000,
     connectionTimeoutMillis: 10000,
@@ -16,6 +14,7 @@ function getPool() {
 }
 
 let _pool: ReturnType<typeof getPool> | null = null;
+let _tableReady = false;
 
 function getSharedPool() {
   if (!_pool) {
@@ -35,6 +34,7 @@ async function query(text: string, params?: unknown[]) {
 }
 
 export async function ensureTable() {
+  if (_tableReady) return;
   await query(`
     CREATE TABLE IF NOT EXISTS payments (
       id            SERIAL PRIMARY KEY,
@@ -47,6 +47,7 @@ export async function ensureTable() {
       created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
   `);
+  _tableReady = true;
 }
 
 export async function insertPayment(row: {
@@ -68,6 +69,7 @@ export async function insertPayment(row: {
 }
 
 export async function updatePaymentByTxHash(txHash: string, status: string) {
+  await ensureTable();
   const result = await query(
     `UPDATE payments SET status = $1 WHERE tx_hash = $2 RETURNING *`,
     [status, txHash]
@@ -85,6 +87,7 @@ export async function getPaymentsByMerchant(merchant: string) {
 }
 
 export async function getPaymentByTxHash(txHash: string) {
+  await ensureTable();
   const result = await query(
     `SELECT * FROM payments WHERE tx_hash = $1 LIMIT 1`,
     [txHash]

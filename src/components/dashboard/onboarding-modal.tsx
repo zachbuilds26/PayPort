@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Icon } from "@/components/ui/icon";
 
-const ONBOARDING_KEY = "payport:onboarded:v1";
 const STEPS = [
   {
     icon: "wallet" as const,
@@ -28,22 +27,25 @@ export function OnboardingModal() {
 
   useEffect(() => {
     try {
-      if (!localStorage.getItem(ONBOARDING_KEY)) {
+      if (!localStorage.getItem("payport:onboarded")) {
         setShow(true);
       }
-    } catch {
-      // SSR or storage error — skip
-    }
+    } catch {}
   }, []);
 
-  function dismiss() {
-    try {
-      localStorage.setItem(ONBOARDING_KEY, "1");
-    } catch {
-      // storage full
+  useEffect(() => {
+    if (!show) return;
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") dismiss();
     }
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [show]);
+
+  const dismiss = useCallback(() => {
+    try { localStorage.setItem("payport:onboarded", "1"); } catch {}
     setShow(false);
-  }
+  }, []);
 
   if (!show) return null;
 
@@ -51,7 +53,13 @@ export function OnboardingModal() {
   const isLast = step === STEPS.length - 1;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-5 backdrop-blur-sm">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Welcome to PayPort"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-5 backdrop-blur-sm"
+      onClick={(e) => { if (e.target === e.currentTarget) dismiss(); }}
+    >
       <section className="w-full max-w-sm border border-line bg-surface p-6 sm:p-8">
         <div className="flex items-center justify-between">
           <p className="text-[10px] font-semibold tracking-[0.15em] text-accent uppercase">
@@ -61,7 +69,7 @@ export function OnboardingModal() {
             type="button"
             onClick={dismiss}
             className="grid size-7 place-items-center border border-line text-xs text-muted hover:border-line-strong hover:text-ink"
-            aria-label="Skip onboarding"
+            aria-label="Close"
           >
             &times;
           </button>
@@ -79,10 +87,11 @@ export function OnboardingModal() {
         <p className="mt-3 text-center text-sm leading-6 text-muted">{current.body}</p>
 
         <div className="mt-8 flex items-center justify-between gap-3">
-          <div className="flex gap-1.5">
+          <div className="flex gap-1.5" role="group" aria-label={`Step ${step + 1} of ${STEPS.length}`}>
             {STEPS.map((_, i) => (
               <span
                 key={i}
+                aria-current={i === step ? "step" : undefined}
                 className={`size-1.5 ${i === step ? "bg-accent" : "bg-line"}`}
               />
             ))}

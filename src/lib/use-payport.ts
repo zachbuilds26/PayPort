@@ -29,7 +29,7 @@ const contract = {
   chainId: xlayerChain.id,
 } as const;
 
-/** Settlement rail marker stored on each Payment. PayPort settles in USDT only. */
+/** Settlement rail marker stored on each Payment. PayPort settles in USDC only. */
 export type SettlementAsset = 1;
 
 export const PAY_TOKEN_SYMBOL = USDC.symbol;
@@ -38,7 +38,7 @@ export function assetSymbol(asset?: SettlementAsset) {
   return asset === null ? "—" : USDC.symbol;
 }
 
-/** Formats a base-unit amount (6 decimals for USDT). */
+/** Formats a base-unit amount (6 decimals for USDC). */
 export function formatAssetAmount(
   value: bigint | undefined,
   asset?: SettlementAsset,
@@ -87,7 +87,7 @@ export function usePaymentLink(slug: string) {
 /**
  * Live quote for a link, refreshed on a timer.
  *
- * USDT is the dollar, so the quoted amount is exact and does not drift.
+ * USDC is the dollar, so the quoted amount is exact and does not drift.
  */
 export function usePaymentQuote(slug: string, enabled = true) {
   const query = useReadContract({
@@ -117,7 +117,7 @@ export function usePaymentQuote(slug: string, enabled = true) {
 }
 
 /**
- * Sends a payment in USDT.
+ * Sends a payment in USDC.
  *
  * The payer approves PayPort once, then the contract pulls the quoted amount
  * and forwards it to the merchant. Any surplus above the exact price is
@@ -144,7 +144,7 @@ export function usePayLink(slug: string) {
     chainId: xlayerChain.id,
   });
 
-  // How much USDT the contract is allowed to pull for this payer.
+  // How much USDC the contract is allowed to pull for this payer.
   const {
     data: allowanceData,
     refetch: refetchAllowance,

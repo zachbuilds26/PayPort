@@ -149,7 +149,7 @@ function CheckoutCard({
           tx_hash: payment.hash,
           status: "settled",
         }),
-      }).catch(() => {});
+      }).catch((err) => console.error("Failed to record payment:", err));
       onPaid(payment.hash);
     }
   }, [payment.isConfirmed, payment.hash, onPaid, slug, link.title, link.priceUsdCents, link.merchant, address]);
@@ -285,7 +285,7 @@ function CheckoutCard({
             Fixed-price settlement
           </p>
           <p className="mt-2 text-xs leading-5 text-muted">
-            This link is priced in dollars and settles in {paySymbol}, - Circle-issued native USDC on X Layer.
+            This link is priced in dollars and settles in {paySymbol}, Circle-issued native USDC on X Layer.
             A small buffer covers rounding and any surplus is refunded in the same transaction.
           </p>
         </div>
