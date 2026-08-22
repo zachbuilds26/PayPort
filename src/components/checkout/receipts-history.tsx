@@ -10,9 +10,8 @@ import {
 } from "@/lib/receipt-history";
 
 /**
- * Receipts confirmed on this device, kept in local storage so a receipt stays
- * reachable after the checkout tab is closed. The transaction hash is not
- * stored on-chain, so this list is the only way back to a past receipt.
+ * Receipts confirmed by this merchant. Shows both database-backed
+ * payment history and local receipts as a fallback.
  */
 export function ReceiptsHistory() {
   const receipts = useStoredReceipts();
@@ -32,7 +31,7 @@ export function ReceiptsHistory() {
           <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-4 sm:px-6">
             <div>
               <p className="text-[10px] font-semibold tracking-[0.15em] text-faint uppercase">
-                On this device
+                Payment history
               </p>
               <h1 className="font-display mt-2 text-2xl tracking-[-0.04em]">My receipts</h1>
             </div>
@@ -56,7 +55,7 @@ export function ReceiptsHistory() {
                 No receipts yet
               </h2>
               <p className="mx-auto mt-3 max-w-xs text-sm leading-6 text-muted">
-                Complete a payment on this device and it will be stored here, so you can always
+                Complete a payment and it will appear here, so you can always
                 find your way back to the receipt.
               </p>
             </div>
