@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { createContext, useContext, useMemo, type ReactNode } from "react";
 import { Icon } from "@/components/ui/icon";
 import { PayPortLogo } from "@/components/ui/payport-logo";
@@ -15,6 +16,10 @@ type DashboardRailContextValue = {
 const DashboardRailContext = createContext<DashboardRailContextValue | null>(null);
 
 function DashboardChrome({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const isOverview = pathname === "/dashboard";
+  const isPayments = pathname === "/payments";
+
   return (
     <div className="min-h-screen bg-background text-ink">
       <header className="sticky top-0 z-20 border-b border-line bg-background/95 px-4 backdrop-blur sm:px-6">
@@ -26,14 +31,18 @@ function DashboardChrome({ children }: { children: ReactNode }) {
           >
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-2 border border-line px-3 py-2 text-xs font-semibold text-muted transition hover:border-line-strong hover:text-ink sm:px-4"
+              className={`inline-flex items-center gap-2 px-3 py-2 text-xs font-semibold transition sm:px-4 ${
+                isOverview ? "text-ink" : "text-muted hover:text-ink"
+              }`}
             >
               <Icon name="grid" className="size-3.5" />
               Overview
             </Link>
             <Link
               href="/payments"
-              className="inline-flex items-center gap-2 border border-line px-3 py-2 text-xs font-semibold text-muted transition hover:border-line-strong hover:text-ink sm:px-4"
+              className={`inline-flex items-center gap-2 px-3 py-2 text-xs font-semibold transition sm:px-4 ${
+                isPayments ? "text-ink" : "text-muted hover:text-ink"
+              }`}
             >
               <Icon name="receipt" className="size-3.5" />
               Payments
@@ -41,7 +50,7 @@ function DashboardChrome({ children }: { children: ReactNode }) {
             <button
               type="button"
               onClick={() => window.dispatchEvent(new Event("payport:open-copilot"))}
-              className="inline-flex items-center gap-2 border border-line px-3 py-2 text-xs font-semibold text-muted transition hover:border-line-strong hover:text-ink sm:px-4"
+              className="inline-flex items-center gap-2 px-3 py-2 text-xs font-semibold text-muted transition hover:text-ink sm:px-4"
             >
               <Icon name="plus" className="size-3.5" />
               Create New Link
