@@ -87,11 +87,6 @@ a.border-line {
   border-radius: 0;
 }
 
-::selection {
-  background: var(--ink);
-  color: var(--background);
-}
-
 .grid-fade {
   background-image:
     linear-gradient(to right, rgba(255,255,255,0.07) 1px, transparent 1px),

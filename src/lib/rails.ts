@@ -30,7 +30,7 @@ export const xlayerTestnet: Chain = {
   },
 };
 
-export const xlayerMainnet: Chain = {
+const xlayerMainnet: Chain = {
   id: 196,
   name: "X Layer",
   nativeCurrency: { name: "OKB", symbol: "OKB", decimals: 18 },

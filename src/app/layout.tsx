@@ -60,8 +60,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${unbounded.variable} ${chakra.variable} ${spaceGrotesk.variable}`}>
-      <body suppressHydrationWarning>
+    <html lang="en" className={`${unbounded.variable} ${chakra.variable} ${spaceGrotesk.variable}`}>
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>

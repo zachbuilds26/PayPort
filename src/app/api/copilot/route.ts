@@ -40,6 +40,15 @@ function parseModelJson(raw: string) {
   return JSON.parse(trimmed.slice(start, end + 1));
 }
 
+function sanitizeReply(text: unknown): string {
+  if (typeof text !== "string") return "";
+  return text
+    .replace(/<[^>]*>/g, "")
+    .replace(/[<>"'&]/g, "")
+    .trim()
+    .slice(0, 500);
+}
+
 /**
  * Offline fallback: the core "create a $X link named Y" command is simple
  * enough to parse without a model, so a network blip never blocks publishing.
@@ -102,7 +111,6 @@ async function callModel(apiKey: string, message: string) {
           if (content) return { ok: true as const, content };
           lastError = new Error("Empty model response.");
         } else {
-          // 4xx other than 429 will not improve by retrying this model.
           lastError = new Error(`Model ${model} returned ${response.status}.`);
           if (response.status !== 429 && response.status < 500) break;
         }
@@ -151,12 +159,28 @@ function buildPrefill(parsed: {
   if (!action.slug) return undefined;
 
   return {
-    reply:
-      typeof parsed.reply === "string" && parsed.reply.trim()
-        ? parsed.reply
-        : `Ready to publish${action.title ? ` "${action.title}"` : ""} at $${action.amount}. Confirm on the form.`,
+    reply: sanitizeReply(
+      parsed.reply || `Ready to publish${action.title ? ` "${action.title}"` : ""} at $${action.amount}. Confirm on the form.`,
+    ),
     action,
   };
+}
+
+/* ---------- simple in-memory rate limiter ---------- */
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT_MAX = 15;
+const RATE_LIMIT_WINDOW_MS = 60_000;
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return true;
+  }
+  if (entry.count >= RATE_LIMIT_MAX) return false;
+  entry.count++;
+  return true;
 }
 
 export async function POST(request: Request) {
@@ -166,6 +190,18 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { reply: "The copilot is not configured yet. Add GROQ_API_KEY to enable it." },
       { status: 503 },
+    );
+  }
+
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    request.headers.get("x-real-ip") ??
+    "unknown";
+
+  if (!checkRateLimit(ip)) {
+    return NextResponse.json(
+      { reply: "Too many requests. Please wait a moment and try again." },
+      { status: 429 },
     );
   }
 
@@ -193,7 +229,7 @@ export async function POST(request: Request) {
 
       if (!prefill) {
         return NextResponse.json({
-          reply: parsed.reply || "How much should this payment link charge, in dollars?",
+          reply: sanitizeReply(parsed.reply) || "How much should this payment link charge, in dollars?",
         });
       }
 
@@ -201,16 +237,11 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({
-      reply:
-        typeof parsed.reply === "string" && parsed.reply.trim()
-          ? parsed.reply
-          : "Could you rephrase that?",
+      reply: sanitizeReply(parsed.reply) || "Could you rephrase that?",
     });
   } catch (error) {
     console.error("[copilot] model unavailable, using local parser:", error);
 
-    // The model could not be reached; the deterministic parser keeps the
-    // publish flow working so merchants are never locked out.
     const local = localParse(message);
     if (local) {
       const prefill = buildPrefill(local);

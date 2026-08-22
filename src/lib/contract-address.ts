@@ -6,5 +6,3 @@ export const PAYPORT_ADDRESS =
 
 export const SETTLEMENT_TOKEN_ADDRESS =
   "0xDec90b78111Ba2fc6FC6d84d8B9ec159A2d4b9B3" as const;
-
-export const DEMO_SLUG = "arcade-run-001" as const;

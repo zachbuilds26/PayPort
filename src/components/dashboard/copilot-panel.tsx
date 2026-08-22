@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAccount, useWriteContract } from "wagmi";
 import { waitForTransactionReceipt } from "wagmi/actions";
@@ -38,11 +38,7 @@ export function CopilotPanel() {
   const { writeContractAsync } = useWriteContract();
   const onCorrectChain = isConnected && chainId === xlayerChain.id;
 
-  const [open, setOpen] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      new URLSearchParams(window.location.search).get("copilot") === "1",
-  );
+  const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<CopilotMessage[]>([
     {
       role: "copilot",
@@ -63,6 +59,7 @@ export function CopilotPanel() {
 
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get("copilot") === "1") {
+      setOpen(true); // eslint-disable-line react-hooks/set-state-in-effect
       window.history.replaceState(null, "", window.location.pathname);
     }
   }, []);
@@ -119,7 +116,7 @@ export function CopilotPanel() {
     }
   }
 
-  async function send(event?: FormEvent<HTMLFormElement>) {
+  const send = useCallback(async (event?: FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
     const message = input.trim();
     if (!message || busy) return;
@@ -196,7 +193,7 @@ export function CopilotPanel() {
       setBusy(false);
       scrollToBottom();
     }
-  }
+  }, [input, busy]);
 
   return (
     <div className="fixed right-5 bottom-6 z-40 flex flex-col items-end gap-3">
@@ -353,8 +350,6 @@ export function CopilotPanel() {
           </form>
         </section>
       )}
-
-
     </div>
   );
 }

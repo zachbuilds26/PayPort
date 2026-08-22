@@ -4,8 +4,6 @@ import Link from "next/link";
 import { createContext, useContext, useMemo, type ReactNode } from "react";
 import { Icon } from "@/components/ui/icon";
 import { PayPortLogo } from "@/components/ui/payport-logo";
-
-
 import { CopilotPanel } from "@/components/dashboard/copilot-panel";
 import { getRail, type RailConfig, type RailKey } from "@/lib/chain";
 
@@ -16,14 +14,12 @@ type DashboardRailContextValue = {
 
 const DashboardRailContext = createContext<DashboardRailContextValue | null>(null);
 
-
 function DashboardChrome({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-ink">
       <header className="sticky top-0 z-20 border-b border-line bg-background/95 px-4 backdrop-blur sm:px-6">
         <div className="relative mx-auto flex max-w-7xl items-center py-3">
           <PayPortLogo compact />
-
           <nav
             className="absolute left-1/2 flex -translate-x-1/2 items-center gap-2"
             aria-label="Merchant navigation"
@@ -46,19 +42,14 @@ function DashboardChrome({ children }: { children: ReactNode }) {
           </nav>
         </div>
       </header>
-
       <main className="pb-16">{children}</main>
-
       <CopilotPanel />
-
-
     </div>
   );
 }
 
 export function DashboardRailShell({ children }: { children: ReactNode }) {
   const rail = getRail("xlayer-testnet");
-
   const value = useMemo<DashboardRailContextValue>(() => ({ railKey: rail.key, rail }), [rail]);
 
   return (
