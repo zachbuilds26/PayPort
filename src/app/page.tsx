@@ -135,7 +135,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:flex-wrap sm:justify-center sm:gap-4 sm:px-8 lg:px-10">
+        <header className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:flex-wrap sm:gap-4 sm:px-8 lg:px-10">
           <PayPortLogo />
           <nav className="hidden sm:flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-medium text-muted sm:gap-6" aria-label="Main navigation">
             <a href="#problem" className="py-2 hover:text-ink">
