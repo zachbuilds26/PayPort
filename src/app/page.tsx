@@ -286,7 +286,7 @@ export default function Home() {
               <p className="text-xs font-semibold tracking-[0.16em] text-accent">{step.number}</p>
               <h3 className="mt-3 text-lg font-medium">{step.step}</h3>
               <p className="mt-2 text-sm leading-6 text-muted">{step.body}</p>
-              <p className="mt-5 break-words border border-line bg-background-deep px-3 py-2.5 font-mono text-xs leading-5 text-muted">
+              <p className="mt-auto pt-5 break-words border border-line bg-background-deep px-3 py-2.5 font-mono text-xs leading-5 text-muted">
                 {step.sample}
               </p>
             </article>
