@@ -62,7 +62,7 @@ export function SplashScreen({ onComplete }: { onComplete: () => void }) {
         <span
           className={`font-display text-2xl font-semibold tracking-[-0.03em] text-ink transition-all duration-300 ${
             phase === "type"
-              ? "max-w-[200px] opacity-100"
+              ? "max-w-[250px] opacity-100"
               : isErasing
                 ? "max-w-0 opacity-0"
                 : "max-w-0 opacity-0"
