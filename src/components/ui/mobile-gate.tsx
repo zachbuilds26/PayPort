@@ -26,12 +26,6 @@ export function MobileGate({ children }: { children: React.ReactNode }) {
             PayPort is best experienced on a larger screen. Open this link on your
             computer to create and manage payment links.
           </p>
-          <a
-            href="/dashboard"
-            className="mt-8 inline-flex border border-line px-5 py-3 text-sm font-semibold hover:border-line-strong hover:bg-surface"
-          >
-            Go to dashboard
-          </a>
         </div>
       </main>
     );

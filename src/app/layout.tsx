@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Chakra_Petch, Space_Grotesk, Unbounded } from "next/font/google";
 import { Providers } from "./providers";
+import { MobileGate } from "@/components/ui/mobile-gate";
 import "./globals.css";
 
 const chakra = Chakra_Petch({
@@ -62,7 +63,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${unbounded.variable} ${chakra.variable} ${spaceGrotesk.variable}`}>
       <body>
-        <Providers>{children}</Providers>
+        <MobileGate>
+          <Providers>{children}</Providers>
+        </MobileGate>
       </body>
     </html>
   );
