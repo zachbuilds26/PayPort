@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { PayPortLogo } from "@/components/ui/payport-logo";
 import { SplashWrapper } from "@/components/ui/splash-wrapper";
+import { MobileGate } from "@/components/ui/mobile-gate";
 import { explorerAddress, xlayerChain, shortenAddress } from "@/lib/chain";
 import { PAYPORT_ADDRESS } from "@/lib/contract-address";
 
@@ -117,6 +118,7 @@ const settlementPoints = [
 export default function Home() {
   return (
     <SplashWrapper>
+    <MobileGate>
     <main className="min-h-screen overflow-hidden bg-background text-ink">
       <section className="relative isolate overflow-hidden">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 grid-fade opacity-60">
@@ -369,6 +371,7 @@ export default function Home() {
         </div>
       </footer>
     </main>
+    </MobileGate>
     </SplashWrapper>
   );
 }
