@@ -356,8 +356,6 @@ function ReceiptCard({
             View on explorer
           </a>
         </div>
-          </Link>
-        </div>
       </section>
 
       <ReceiptPrintLayout printRef={printRef} title={title} priceUsdCents={priceUsdCents} symbol={symbol} amountLabel={amountLabel} rateLabel={rateLabel} paidAtLabel={paidAtLabel} merchant={merchant} payer={payer} hash={hash} />
