@@ -223,7 +223,7 @@ export function CopilotPanel() {
             {messages.map((message, index) => (
               <div key={index} className={message.role === "merchant" ? "flex justify-end" : "flex justify-start"}>
                 <div
-                  className={`max-w-[88%] border px-3 py-2 text-sm leading-5 ${
+                  className={`max-w-[88%] min-w-[200px] border px-3 py-2 text-sm leading-5 ${
                     message.role === "merchant"
                       ? "border-accent/30 bg-accent/10 text-ink"
                       : "border-line bg-background-deep text-ink"
