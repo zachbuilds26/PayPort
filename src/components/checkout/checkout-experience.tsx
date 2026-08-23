@@ -422,12 +422,6 @@ function PaidReceipt({ link, slug, hash }: { link: OnchainLink; slug: string; ha
             View receipt
             <Icon name="arrow-up-right" className="ml-2 size-4" />
           </Link>
-          <Link
-            href="/dashboard"
-            className="inline-flex w-full items-center justify-center border border-line py-3 text-sm font-semibold hover:border-line-strong hover:bg-surface-raised"
-          >
-            Back to dashboard
-          </Link>
         </div>
       </section>
   );
