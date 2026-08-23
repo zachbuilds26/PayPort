@@ -189,12 +189,6 @@ function StoredReceiptCard({
         >
           View on explorer
         </a>
-        <Link
-          href="/dashboard"
-          className="inline-flex flex-1 items-center justify-center border border-line px-4 py-3 text-sm font-semibold hover:border-line-strong hover:bg-surface-raised"
-        >
-          Done
-        </Link>
       </div>
     </section>
   );
@@ -361,18 +355,7 @@ function ReceiptCard({
           >
             View on explorer
           </a>
-          <Link
-            href="/dashboard"
-            className="inline-flex flex-1 items-center justify-center border border-line px-4 py-3 text-sm font-semibold hover:border-line-strong hover:bg-surface-raised"
-          >
-            Done
-          </Link>
-          <Link
-            href="/receipts"
-            className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-muted underline underline-offset-2 hover:text-ink"
-          >
-            <Icon name="grid" className="size-3" />
-            View all my receipts
+        </div>
           </Link>
         </div>
       </section>
