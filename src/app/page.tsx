@@ -123,7 +123,7 @@ export default function Home() {
         </div>
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
-          <div className="absolute inset-0 opacity-[0.20]" style={{ maskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)' }}>
+          <div className="absolute right-0 bottom-0 z-0 w-[120%] h-[120%] opacity-[0.20]" style={{ maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)', transform: 'translateX(350px) translateY(80px) scale(1.8)', transformOrigin: 'bottom right' }}>
             <Image
               src="/hero-engraving.webp"
               alt=""
@@ -131,7 +131,7 @@ export default function Home() {
               sizes="100vw"
               priority
               unoptimized
-              className="object-cover object-center sm:object-right-bottom"
+              className="object-contain object-right-bottom"
             />
           </div>
         </div>
