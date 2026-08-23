@@ -88,13 +88,6 @@ function LinkActions({
       >
         <Icon name="arrow-up-right" className="size-3.5" />
       </Link>
-      <Link
-        href="/payments"
-        aria-label={`View payments for ${link.title}`}
-        className="grid size-9 place-items-center border border-line text-muted hover:border-line-strong hover:text-ink"
-      >
-        <Icon name="receipt" className="size-3.5" />
-      </Link>
     </div>
   );
 }
