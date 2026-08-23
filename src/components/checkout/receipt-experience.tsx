@@ -471,12 +471,6 @@ function Issue({ title, body }: { title: string; body: string }) {
       </p>
       <h1 className="font-display mt-3 text-3xl tracking-[-0.045em]">{title}</h1>
       <p className="mx-auto mt-4 max-w-sm text-sm leading-6 text-muted">{body}</p>
-      <Link
-        href="/"
-        className="mt-7 inline-flex border border-line px-4 py-2.5 text-sm font-semibold hover:border-line-strong hover:bg-surface-raised"
-      >
-        Return home
-      </Link>
     </section>
   );
 }
