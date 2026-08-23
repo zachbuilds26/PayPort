@@ -123,7 +123,7 @@ export default function Home() {
         </div>
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
-          <div className="absolute right-0 bottom-0 z-0 w-[120%] h-[120%] opacity-[0.20]" style={{ maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)', transform: 'translateX(350px) translateY(80px) scale(1.8)', transformOrigin: 'bottom right' }}>
+          <div className="absolute right-0 bottom-0 z-0 h-[70%] w-full opacity-[0.20] sm:h-[120%] sm:w-[120%]" style={{ maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)', transform: 'translateX(10%) translateY(10%) scale(1.3)', transformOrigin: 'bottom right' }}>
             <Image
               src="/hero-engraving.webp"
               alt=""
@@ -135,9 +135,9 @@ export default function Home() {
             />
           </div>
         </div>
-        <header className="relative z-10 mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8 lg:px-10">
+        <header className="relative z-10 mx-auto flex max-w-7xl flex-col items-center gap-4 px-5 py-5 sm:flex-row sm:flex-wrap sm:justify-between sm:px-8 lg:px-10">
           <PayPortLogo />
-          <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-medium text-muted sm:gap-6" aria-label="Main navigation">
+          <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-medium text-muted sm:gap-6" aria-label="Main navigation">
             <a href="#problem" className="py-2 hover:text-ink">
               The problem
             </a>

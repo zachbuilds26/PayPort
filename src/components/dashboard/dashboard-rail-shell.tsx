@@ -27,34 +27,34 @@ function DashboardChrome({ children }: { children: ReactNode }) {
         <div className="relative mx-auto flex max-w-7xl items-center px-5 py-3 sm:px-8 lg:px-10">
           <PayPortLogo compact />
           <nav
-            className="absolute left-1/2 flex -translate-x-1/2 items-center gap-2"
+            className="absolute left-1/2 flex -translate-x-1/2 items-center gap-1 sm:gap-2"
             aria-label="Merchant navigation"
           >
             <Link
               href="/dashboard"
-              className={`inline-flex items-center gap-2 px-3 py-2 text-xs font-semibold transition sm:px-4 ${
+              className={`inline-flex items-center gap-2 px-2 py-2 text-xs font-semibold transition sm:px-4 ${
                 isOverview ? "text-ink" : "text-muted hover:text-ink"
               }`}
             >
               <Icon name="grid" className="size-3.5" />
-              Overview
+              <span className="hidden sm:inline">Overview</span>
             </Link>
             <Link
               href="/payments"
-              className={`inline-flex items-center gap-2 px-3 py-2 text-xs font-semibold transition sm:px-4 ${
+              className={`inline-flex items-center gap-2 px-2 py-2 text-xs font-semibold transition sm:px-4 ${
                 isPayments ? "text-ink" : "text-muted hover:text-ink"
               }`}
             >
               <Icon name="receipt" className="size-3.5" />
-              Payments
+              <span className="hidden sm:inline">Payments</span>
             </Link>
             <button
               type="button"
               onClick={() => window.dispatchEvent(new Event("payport:open-copilot"))}
-              className="inline-flex items-center gap-2 px-3 py-2 text-xs font-semibold text-muted transition hover:text-ink sm:px-4"
+              className="inline-flex items-center gap-2 px-2 py-2 text-xs font-semibold text-muted transition hover:text-ink sm:px-4"
             >
               <Icon name="plus" className="size-3.5" />
-              Create New Link
+              <span className="hidden sm:inline">Create New Link</span>
             </button>
           </nav>
           <div className="ml-auto">
