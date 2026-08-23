@@ -290,26 +290,7 @@ export function CopilotPanel() {
                   )}
 
                   {message.status === "published" && message.txHash && (
-                    <div className="mt-2 border border-line bg-surface px-3 py-2">
-                      <p className="text-xs font-semibold text-success">Live on X Layer.</p>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const url = `${window.location.origin}${buildCheckoutPath(message.draft!.slug)}`;
-                          void navigator.clipboard.writeText(url);
-                        }}
-                        className="mt-2 w-full border border-line px-2 py-1.5 text-xs font-semibold hover:border-line-strong hover:text-ink"
-                      >
-                        Copy checkout URL
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => router.push(buildCheckoutPath(message.draft!.slug))}
-                        className="mt-1.5 w-full bg-accent px-2 py-1.5 text-xs font-semibold text-accent-ink hover:bg-white"
-                      >
-                        View checkout
-                      </button>
-                    </div>
+                    <CopyButton slug={message.draft!.slug} />
                   )}
                 </div>
               </div>
@@ -350,6 +331,38 @@ export function CopilotPanel() {
           </form>
         </section>
       )}
+    </div>
+  );
+}
+
+function CopyButton({ slug }: { slug: string }) {
+  const [copied, setCopied] = useState(false);
+  const router = useRouter();
+
+  function handleCopy() {
+    const url = `${window.location.origin}${buildCheckoutPath(slug)}`;
+    void navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
+
+  return (
+    <div className="mt-2 border border-line bg-surface px-3 py-2">
+      <p className="text-xs font-semibold text-success">Live on X Layer.</p>
+      <button
+        type="button"
+        onClick={handleCopy}
+        className="mt-2 w-full border border-line px-2 py-1.5 text-xs font-semibold hover:border-line-strong hover:text-ink"
+      >
+        {copied ? "Copied!" : "Copy checkout URL"}
+      </button>
+      <button
+        type="button"
+        onClick={() => router.push(buildCheckoutPath(slug))}
+        className="mt-1.5 w-full bg-accent px-2 py-1.5 text-xs font-semibold text-accent-ink hover:bg-white"
+      >
+        View checkout
+      </button>
     </div>
   );
 }
